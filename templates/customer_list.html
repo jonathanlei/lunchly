@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Customers{% endblock %}
+{% block content %}
+
+  <a class="btn btn-primary" style="float: right" href="/add/">Add a Customer</a>
+
+  <h1>{{ pageTitle }}</h1>
+  <!-- boolean instead -->
+  {% if pageTitle !== "Best Customers by Number of Reservations" %}
+  <ul style="column-count: 4">
+    {% for customer in customers %}
+      <li>
+        <a href="/{{ customer.id }}/">
+          {{ customer.fullName() }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <ol style="column-count: 1">
+    {% for customer in customers %}
+      <li>
+        <a href="/{{ customer.id }}/">
+          {{ customer.fullName() }}
+        </a>
+        <p> Number of Reservations : {{customer.reservationNum}}</p>
+      </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+
+{% endblock %}
